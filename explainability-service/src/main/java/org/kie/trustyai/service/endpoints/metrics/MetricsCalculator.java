@@ -2,8 +2,6 @@ package org.kie.trustyai.service.endpoints.metrics;
 
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import org.jboss.logging.Logger;
 import org.kie.trustyai.explainability.model.Dataframe;
 import org.kie.trustyai.explainability.model.Output;
@@ -18,6 +16,8 @@ import org.kie.trustyai.service.payloads.PayloadConverter;
 import org.kie.trustyai.service.payloads.ReconciledMetricRequest;
 
 import io.quarkus.cache.CacheResult;
+
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class MetricsCalculator {

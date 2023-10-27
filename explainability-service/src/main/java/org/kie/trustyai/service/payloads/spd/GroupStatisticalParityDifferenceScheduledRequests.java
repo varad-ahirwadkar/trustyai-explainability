@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.inject.Singleton;
-
 import org.kie.trustyai.service.payloads.BaseMetricRequest;
+
+import jakarta.inject.Singleton;
 
 @Singleton
 public class GroupStatisticalParityDifferenceScheduledRequests {

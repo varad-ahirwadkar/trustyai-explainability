@@ -1,13 +1,13 @@
 package org.kie.trustyai.service.payloads;
 
-import javax.enterprise.inject.Instance;
-
 import org.kie.trustyai.service.data.DataSource;
 import org.kie.trustyai.service.data.metadata.Metadata;
 import org.kie.trustyai.service.payloads.values.DataType;
 import org.kie.trustyai.service.payloads.values.TypedValue;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import jakarta.enterprise.inject.Instance;
 
 @JsonPropertyOrder({ "protected", "favorable" })
 public class ReconciledMetricRequest {

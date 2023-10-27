@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
-
 import org.hamcrest.Matchers;
 import org.jboss.resteasy.reactive.RestResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,11 +23,12 @@ import io.quarkus.test.junit.TestProfile;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;
 
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
 @TestProfile(BaseTestProfile.class)

@@ -17,8 +17,6 @@ package org.kie.trustyai.service.endpoints.explainers.global;
 
 import java.util.List;
 
-import javax.ws.rs.core.Response;
-
 import org.kie.trustyai.explainability.model.Dataframe;
 import org.kie.trustyai.explainability.model.Prediction;
 import org.kie.trustyai.explainability.model.PredictionProvider;
@@ -27,6 +25,8 @@ import org.kie.trustyai.service.data.DataSource;
 import org.kie.trustyai.service.endpoints.explainers.ExplainerEndpoint;
 import org.kie.trustyai.service.payloads.BaseExplanationResponse;
 import org.kie.trustyai.service.payloads.GlobalExplanationRequest;
+
+import jakarta.ws.rs.core.Response;
 
 public abstract class GlobalExplainerEndpoint extends ExplainerEndpoint {
 

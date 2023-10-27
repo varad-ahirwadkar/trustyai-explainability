@@ -9,10 +9,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import org.jboss.logging.Logger;
 import org.kie.trustyai.connectors.kserve.v2.PayloadParser;
 import org.kie.trustyai.connectors.kserve.v2.TensorConverter;
@@ -26,6 +22,10 @@ import org.kie.trustyai.service.endpoints.explainers.ExplainerEndpoint;
 import org.kie.trustyai.service.payloads.consumer.InferencePartialPayload;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 /**
  * Reconcile partial input and output inference payloads in the KServe v2 protobuf format.

@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import org.jboss.logging.Logger;
 import org.kie.trustyai.service.config.ServiceConfig;
 import org.kie.trustyai.service.payloads.ReconciledMetricRequest;
@@ -17,6 +14,9 @@ import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Tag;
 import io.micrometer.core.instrument.Tags;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 @Singleton
 public class PrometheusPublisher {

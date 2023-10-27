@@ -20,29 +20,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 import org.kie.trustyai.explainability.local.counterfactual.CounterfactualExplainer;
 import org.kie.trustyai.explainability.local.counterfactual.CounterfactualResult;
-import org.kie.trustyai.explainability.model.CounterfactualPrediction;
-import org.kie.trustyai.explainability.model.Feature;
-import org.kie.trustyai.explainability.model.FeatureDistribution;
-import org.kie.trustyai.explainability.model.Output;
-import org.kie.trustyai.explainability.model.Prediction;
-import org.kie.trustyai.explainability.model.PredictionInput;
-import org.kie.trustyai.explainability.model.PredictionInputsDataDistribution;
-import org.kie.trustyai.explainability.model.PredictionOutput;
-import org.kie.trustyai.explainability.model.PredictionProvider;
-import org.kie.trustyai.explainability.model.Value;
+import org.kie.trustyai.explainability.model.*;
 import org.kie.trustyai.explainability.model.domain.FeatureDomain;
 import org.kie.trustyai.explainability.utils.DataUtils;
 import org.kie.trustyai.service.config.ServiceConfig;
@@ -52,6 +34,15 @@ import org.kie.trustyai.service.payloads.BaseExplanationResponse;
 import org.kie.trustyai.service.payloads.CounterfactualExplanationRequest;
 import org.kie.trustyai.service.payloads.CounterfactualExplanationResponse;
 import org.kie.trustyai.service.payloads.LocalExplanationRequest;
+
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 @Tag(name = "Counterfactual Explainer Endpoint")
 @Path("/explainers/local/cf")

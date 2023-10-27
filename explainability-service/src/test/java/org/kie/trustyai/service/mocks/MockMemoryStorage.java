@@ -1,11 +1,11 @@
 package org.kie.trustyai.service.mocks;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Alternative;
-
 import org.kie.trustyai.service.data.storage.MemoryStorage;
 
 import io.quarkus.test.Mock;
+
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Alternative;
 
 @Mock
 @Alternative

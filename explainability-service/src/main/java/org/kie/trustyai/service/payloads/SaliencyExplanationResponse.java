@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-
 import org.kie.trustyai.explainability.model.FeatureImportance;
 import org.kie.trustyai.explainability.model.Saliency;
 import org.kie.trustyai.explainability.model.SaliencyResults;
+
+import jakarta.annotation.Nonnull;
 
 public class SaliencyExplanationResponse extends BaseExplanationResponse {
 
@@ -18,6 +18,31 @@ public class SaliencyExplanationResponse extends BaseExplanationResponse {
     public SaliencyExplanationResponse(Map<String, List<FeatureSaliency>> saliencies) {
         super();
         this.saliencies = saliencies;
+    }
+
+    public static SaliencyExplanationResponse fromSaliencyResults(@Nonnull SaliencyResults saliencyResults) {
+        Map<String, List<SaliencyExplanationResponse.FeatureSaliency>> featureSaliencyMap = new HashMap<>();
+
+        for (Map.Entry<String, Saliency> saliencyMap : saliencyResults.getSaliencies().entrySet()) {
+            List<SaliencyExplanationResponse.FeatureSaliency> featureSaliencies = new ArrayList<>();
+            String outputName = saliencyMap.getKey();
+            Saliency saliency = saliencyMap.getValue();
+            for (FeatureImportance featureImportance : saliency.getPerFeatureImportance()) {
+                SaliencyExplanationResponse.FeatureSaliency featureSaliency = new SaliencyExplanationResponse.FeatureSaliency();
+                featureSaliency.setName(featureImportance.getFeature().getName());
+                featureSaliency.setScore(featureImportance.getScore());
+                featureSaliency.setConfidence(featureImportance.getConfidence());
+                featureSaliencies.add(featureSaliency);
+            }
+            featureSaliencyMap.put(outputName, featureSaliencies);
+        }
+
+        return new SaliencyExplanationResponse(featureSaliencyMap);
+    }
+
+    public static SaliencyExplanationResponse empty() {
+        Map<String, List<SaliencyExplanationResponse.FeatureSaliency>> featureSaliencyMap = new HashMap<>();
+        return new SaliencyExplanationResponse(featureSaliencyMap);
     }
 
     public Map<String, List<FeatureSaliency>> getSaliencies() {
@@ -78,30 +103,5 @@ public class SaliencyExplanationResponse extends BaseExplanationResponse {
                     ", confidence=" + confidence +
                     '}';
         }
-    }
-
-    public static SaliencyExplanationResponse fromSaliencyResults(@Nonnull SaliencyResults saliencyResults) {
-        Map<String, List<SaliencyExplanationResponse.FeatureSaliency>> featureSaliencyMap = new HashMap<>();
-
-        for (Map.Entry<String, Saliency> saliencyMap : saliencyResults.getSaliencies().entrySet()) {
-            List<SaliencyExplanationResponse.FeatureSaliency> featureSaliencies = new ArrayList<>();
-            String outputName = saliencyMap.getKey();
-            Saliency saliency = saliencyMap.getValue();
-            for (FeatureImportance featureImportance : saliency.getPerFeatureImportance()) {
-                SaliencyExplanationResponse.FeatureSaliency featureSaliency = new SaliencyExplanationResponse.FeatureSaliency();
-                featureSaliency.setName(featureImportance.getFeature().getName());
-                featureSaliency.setScore(featureImportance.getScore());
-                featureSaliency.setConfidence(featureImportance.getConfidence());
-                featureSaliencies.add(featureSaliency);
-            }
-            featureSaliencyMap.put(outputName, featureSaliencies);
-        }
-
-        return new SaliencyExplanationResponse(featureSaliencyMap);
-    }
-
-    public static SaliencyExplanationResponse empty() {
-        Map<String, List<SaliencyExplanationResponse.FeatureSaliency>> featureSaliencyMap = new HashMap<>();
-        return new SaliencyExplanationResponse(featureSaliencyMap);
     }
 }

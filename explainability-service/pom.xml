@@ -32,6 +32,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+          <!-- Refer to https://issues.redhat.com/browse/RHOAIENG-13454-->
           <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>

@@ -23,6 +23,7 @@
     <dependencyManagement>
         <dependencies>
             <!-- Override the version of protobuf-java until io-grpc moves from 3.25.3 to 3.25.5-->
+            <!-- Refer to https://issues.redhat.com/browse/RHOAIENG-13454-->
             <dependency>
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java</artifactId>

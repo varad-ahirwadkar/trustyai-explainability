@@ -16,7 +16,7 @@
 ARG SOURCE_CODE=.
 ARG CI_CONTAINER_VERSION="unknown"
 
-FROM registry.redhat.io/ubi8/ubi-minimal AS stage
+FROM registry.redhat.io/ubi8/ubi-minimal@sha256:7583ca0ea52001562bd81a961da3f75222209e6192e4e413ee226cff97dbd48c AS stage
 
 # Define a build argument for the PNC list of built files
 ARG PNC_FILES_JSON
@@ -36,7 +36,7 @@ RUN echo "$PNC_FILES_JSON" | jq -r '.[] | select(test("\\.zip$"))' | \
 
 
 ###############################################################################
-FROM registry.redhat.io/ubi8/openjdk-17-runtime:latest as runtime
+FROM registry.redhat.io/ubi8/openjdk-17-runtime@sha256:e2f33a6c60db4f4e70882a4a557eec5890997f8a1be7e3eb8971a0ff8a45a1a8 as runtime
 ENV LANGUAGE='en_US:en'
 
 
@@ -48,17 +48,16 @@ COPY --from=stage /root/explainability-service/target/quarkus-app/quarkus/ /depl
 
 
 ## Build args to be used at this step
-ARG CI_CONTAINER_VERSION
 ARG USER=185
 ENV JAVA_OPTS="-Dquarkus.http.host=0.0.0.0 -Djava.zutil.logging.manager=org.jboss.logmanager.LogManager"
 ENV JAVA_APP_JAR="/deployments/quarkus-run.jar"
 
 LABEL com.redhat.component="odh-trustyai-service" \
       name="managed-open-data-hub/odh-trustyai-service-rhel8" \
-      version="${CI_CONTAINER_VERSION}" \
+      description="TrustyAI is a service to provide integration fairness and bias tracking to modelmesh-served models" \
       summary="odh-trustyai-service" \
+      maintainer="['managed-open-data-hub@redhat.com']" \
       io.openshift.expose-services="" \
       io.k8s.display-name="odh-trustyai-service" \
-      maintainer="['managed-open-data-hub@redhat.com']" \
-      description="TrustyAI is a service to provide integration fairness and bias tracking to modelmesh-served models" \
+      io.k8s.description="odh-trustyai-service" \
       com.redhat.license_terms="https://www.redhat.com/licenses/Red_Hat_Standard_EULA_20191108.pdf"

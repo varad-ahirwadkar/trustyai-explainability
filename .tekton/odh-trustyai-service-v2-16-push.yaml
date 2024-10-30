@@ -43,6 +43,8 @@ spec:
     value: 'master'
   - name: pnc-profile
     value: 'prod'
+  - name: prefetch-input
+    value: '{"type": "generic_lockfile", "path": "."}'
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while reducing network traffic.

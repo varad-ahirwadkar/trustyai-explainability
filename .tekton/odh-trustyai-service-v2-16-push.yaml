@@ -44,7 +44,7 @@ spec:
   - name: pnc-profile
     value: 'prod'
   - name: prefetch-input
-    value: '{"type": "generic", "path": "."}'
+    value: '{"type": "rpm", "path": "."}'
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while reducing network traffic.
@@ -398,6 +398,8 @@ spec:
       params:
       - name: input
         value: $(params.prefetch-input)
+      - name: dev-package-managers
+        value: "true"
       runAfter:
       - pnc-cli-build
       taskRef:

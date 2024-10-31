@@ -18,20 +18,11 @@ ARG CI_CONTAINER_VERSION="unknown"
 
 FROM registry.redhat.io/ubi8/ubi-minimal@sha256:4e07d79182a85dd10951c19f294a7b6e9dcc7d73e02efc5a969cdbd24f37e929 AS stage
 
-# Define a build argument for the PNC list of built files
-ARG PNC_FILES_JSON
-RUN echo "Files to download: $PNC_FILES_JSON"
-
 # Install packages for the install script and extract archives
 RUN microdnf --setopt=install_weak_deps=0 --setopt=tsflags=nodocs install -y unzip jq wget
 
 ENV STAGE_DIR="/tmp/artifacts"
 WORKDIR $STAGE_DIR
-
-# Filter the zip files only and unzip them in /root/
-#RUN echo "$PNC_FILES_JSON" | jq -r '.[] | select(test("\\.zip$"))' | \
-  #  while read url; do wget --no-check-certificate "$url"; done && \
-   # for file in *.zip; do unzip -d /root/ "$file"; done
 
 # Change to the output directory and unzip .zip files into /root/
 RUN cd /cachi2/output/deps/generic && \

@@ -331,8 +331,6 @@ spec:
               cat  $(results.pnc-file-list.path)
 
       workspaces:
-      - name: output
-        workspace: workspace
       - name: source
         workspace: workspace
     - name: prefetch-dependencies

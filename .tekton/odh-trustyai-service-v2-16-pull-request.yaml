@@ -284,7 +284,7 @@ spec:
             name: pnc-file-list
         steps:
           - name: run-pnc-build
-            image: quay.io/redhat-user-workloads/konflux-jbs-pnc-tenant/pnc/pnc-cli:48a761b5093bc474850b2ebcf06641825940deb7
+            image: quay.io/redhat-user-workloads/konflux-jbs-pnc-tenant/pnc/pnc-cli@sha256:00f29bb186e3afedbffeb57942038f7d9ad747640e0a4ae2c53c573a8cdece74
             env:
               - name: SSO_SERVICE_ACCOUNT_NAME
                 valueFrom:

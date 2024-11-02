@@ -22,7 +22,7 @@ RUN ls -la ./workspace/source
 
 # Install packages for the install script and extract archives
 RUN microdnf --setopt=install_weak_deps=0 --setopt=tsflags=nodocs install -y unzip jq wget
-RUN ls -la ./workspace/source
+RUN ls -la ./source
 ENV STAGE_DIR="/tmp/artifacts"
 WORKDIR $STAGE_DIR
 

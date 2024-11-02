@@ -24,6 +24,8 @@ RUN microdnf --setopt=install_weak_deps=0 --setopt=tsflags=nodocs install -y unz
 ENV STAGE_DIR="/tmp/artifacts"
 WORKDIR $STAGE_DIR
 
+RUN ls -lR /workspace/source
+
 # Change to the output directory and unzip .zip files into /root/
 RUN cd /cachi2/source/deps/generic && \
     for file in *.zip; do unzip -d /root/ "$file"; done

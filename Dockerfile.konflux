@@ -18,7 +18,7 @@ ARG CI_CONTAINER_VERSION="unknown"
 
 FROM registry.redhat.io/ubi8/ubi-minimal@sha256:7583ca0ea52001562bd81a961da3f75222209e6192e4e413ee226cff97dbd48c AS stage
 
-RUN ls -la ./source
+RUN ls -la /workspace
 
 # Install packages for the install script and extract archives
 RUN microdnf --setopt=install_weak_deps=0 --setopt=tsflags=nodocs install -y unzip jq wget

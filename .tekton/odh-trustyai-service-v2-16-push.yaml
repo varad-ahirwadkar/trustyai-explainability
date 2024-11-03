@@ -367,31 +367,29 @@ spec:
               set -e
 
               echo -e "\n=== Build config ==="
-              cat /workspace/output/build-config/$(params.build-config-path)
-              cp /workspace/output/build-config/$(params.build-config-path) /workspace/output
+              cat /workspace/source/build-config/$(params.build-config-path)
+              cp /workspace/source/build-config/$(params.build-config-path) /workspace/source
+              
               echo -e "===================="
-
               echo -e "\nReplacing credentials in the CLI config ..."
-              envsubst '${SSO_SERVICE_ACCOUNT_NAME} ${SSO_SERVICE_ACCOUNT_CLIENT_SECRET}' < /workspace/output/cli-config/konflux/configs/pnc_cli/config.yaml > /workspace/output/config.yaml
-
+              envsubst '${SSO_SERVICE_ACCOUNT_NAME} ${SSO_SERVICE_ACCOUNT_CLIENT_SECRET}' < /workspace/source/cli-config/konflux/configs/pnc_cli/config.yaml > /workspace/source/config.yaml
+              
               echo -e "\nStarting the PNC build ..."
-              PNC_CLI_OUTPUT_FILE="/workspace/output/pnc-cli-run-output.json"
-              java -jar /home/jboss/bacon.jar pig run --mode=FORCE --downloadAttempts=3 /workspace/output -p /workspace/output --profile ${PNC_PROFILE} --jsonOutput > $PNC_CLI_OUTPUT_FILE
-
+              PNC_CLI_OUTPUT_FILE="/workspace/source/pnc-cli-run-output.json"
+              java -jar /home/jboss/bacon.jar pig run --mode=FORCE --downloadAttempts=3 /workspace/source -p /workspace/source --profile ${PNC_PROFILE} --jsonOutput > $PNC_CLI_OUTPUT_FILE
+              
               echo -e "\nFinished the PNC build!"
               echo -e "\n=== PNC build output ==="
               cat $PNC_CLI_OUTPUT_FILE
               echo -e "===================="
-
+              
               echo -e "\nGetting the list of built files (to be used later in the container build) ..."
               jq '[.builds[].builtArtifacts[]?.downloadUrl ]' "$PNC_CLI_OUTPUT_FILE" > "$(results.pnc-file-list.path)"
-              
-              jq '{metadata: {version: "1.0"}, artifacts: [.builds[].builtArtifacts[]? | select(.downloadUrl | endswith(".zip")) | {download_url: .downloadUrl , checksums: {sha256: .sha256}}] }' $PNC_CLI_OUTPUT_FILE | yq -p json > /workspace/output/generic_lockfile.yaml
+              jq '{metadata: {version: "1.0"}, artifacts: [.builds[].builtArtifacts[]? | select(.downloadUrl | endswith(".zip")) | {download_url: .downloadUrl , checksums: {sha256: .sha256}}] }' $PNC_CLI_OUTPUT_FILE | yq -p json > "$(workspaces.source.path)/source/generic_lockfile.yaml"
               
               cat  $(results.pnc-file-list.path)
-
       workspaces:
-      - name: output
+      - name: source
         workspace: workspace
 
     - name: prefetch-dependencies

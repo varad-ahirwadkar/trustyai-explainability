@@ -1,6 +1,5 @@
-# retrigger
 metadata:
   version: "1.0"
 artifacts:
-  - download_url: https://indy.corp.redhat.com/api/content/maven/hosted/pnc-builds/org/kie/trustyai/explainability-service/999.0.0.managedsvc-redhat-01173/explainability-service-999.0.0.managedsvc-redhat-01173.zip
-    checksum: sha256:683835b6c08ef4f799ca55f6d62e31546f1bf4c70a94dc2752628578d8e733f0
+  - download_url: https://indy.corp.redhat.com/api/content/maven/hosted/pnc-builds/org/kie/trustyai/explainability-service/999.0.0.managedsvc-redhat-01178/explainability-service-999.0.0.managedsvc-redhat-01178.zip
+    checksum: sha256:b6cdd1be98a7e56c4d673b9ef418ac8f610e5862c482544078a73c7b3b1c5440

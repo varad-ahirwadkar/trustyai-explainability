@@ -10,7 +10,8 @@ metadata:
     build.appstudio.openshift.io/build-nudge-files: "build/operator-nudging.yaml"
     pipelinesascode.tekton.dev/on-cel-expression: |
       event == "push" 
-      && target_branch == "rhoai-2.17" && "artifacts.lock.yaml".pathChanged()
+      && target_branch == "rhoai-2.17" 
+      && ("artifacts.lock.yaml".pathChanged() || ".tekton/odh-trustyai-service-v2-17-push.yaml".pathChanged())
   creationTimestamp:
   labels:
     appstudio.openshift.io/application: rhoai-v2-17

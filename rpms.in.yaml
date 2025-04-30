@@ -1,8 +1,7 @@
+arches:
+- x86_64
 contentOrigin:
   repofiles:
     - ubi.repo
 packages:
   - unzip
-  - jq
-  - wget
-  - shadow-utils

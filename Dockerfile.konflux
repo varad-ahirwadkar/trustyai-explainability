@@ -21,6 +21,9 @@ FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:e1c4703364c5cb58f5462575
 # Install packages for the install script and extract archives
 RUN microdnf --setopt=install_weak_deps=0 --setopt=tsflags=nodocs install -y unzip
 
+RUN cd ./cachi2/output/deps/generic && \
+    for file in *.zip; do unzip -d /root/ "$file"; done
+
 ###############################################################################
 FROM registry.access.redhat.com/ubi9/openjdk-17-runtime@sha256:07e1fcaaeb8d4210dccd781a47e123df5d3c917d868a4ff325739118403bbc7c as runtime
 ENV LANGUAGE='en_US:en'
